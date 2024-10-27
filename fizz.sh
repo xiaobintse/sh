@@ -7,8 +7,8 @@ FIZZUP_VERSION="v1.0.1"
 
 # Fizz variables
 GATEWAY_ADDRESS="provider.vycod.com" # Provider domain: example = provider.devnetcsphn.com
-GATEWAY_PROXY_PORT="8553" # Proxyport = 8553
-GATEWAY_WEBSOCKET_PORT="8544" # ws url of the gateway example= ws://provider.devnetcsphn.com:8544
+GATEWAY_PROXY_PORT="4561" # Proxyport = 8553
+GATEWAY_WEBSOCKET_PORT="4562" # ws url of the gateway example= ws://provider.devnetcsphn.com:8544
 CPU_PRICE="6"
 CPU_UNITS="8"
 MEMORY_PRICE="2.4000000000000004"
