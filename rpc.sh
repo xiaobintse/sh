@@ -18,7 +18,7 @@ for dir in hy*/; do
 
       # 运行 docker-compose up -d
       echo "正在运行 docker-compose up -d 在 $dir"
-      docker-compose up -d
+      docker compose up -d
     else
       echo "在 $dir 中未找到 docker-compose.yml 文件"
     fi
