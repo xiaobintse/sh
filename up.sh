@@ -6,13 +6,6 @@ for dir in hy*/; do
     echo "进入目录: $dir"
     cd "$dir" || { echo "无法进入目录 $dir"; continue; }
 
-    echo "正在清理 Docker 系统..."
-    if ! (docker system prune -a -f && docker volume prune -f && docker network prune -f); then
-      echo "Docker 清理失败，退出 $dir"
-      cd ..
-      continue
-    fi
-
  echo "正在更新 DNS 配置..."
     sudo bash -c 'echo -e "nameserver 8.8.8.8\nnameserver 8.8.4.4" > /etc/resolv.conf'
 
