@@ -10,7 +10,7 @@ for i in {460..480}; do
     # 确保该目录中存在 docker-compose.yml 文件
     if [ -f "docker-compose.yml" ]; then
       echo "正在运行 docker-compose up -d 在 $dir"
-      docker compose down
+      docker compose up -d
     else
       echo "在 $dir 中未找到 docker-compose.yml 文件"
     fi
