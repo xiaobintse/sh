@@ -6,9 +6,6 @@ for dir in hy*/; do
     echo "进入目录: $dir"
     cd "$dir" || { echo "无法进入目录 $dir"; continue; }
 
- echo "正在更新 DNS 配置..."
-    sudo bash -c 'echo -e "nameserver 8.8.8.8\nnameserver 8.8.4.4" > /etc/resolv.conf'
-
     # 确保存在 docker-compose.yml 文件
     if [ -f "docker-compose.yml" ]; then
       echo "正在启动 Docker Compose 服务..."
