@@ -151,7 +151,7 @@ setup_env() {
     cat >$ENV_FILE <<EOF
 GRPC_URL=grpc.testnet.layeredge.io:9090
 CONTRACT_ADDR=cosmos1ufs3tlq4umljk0qfe8k5ya0x6hpavn897u2cnf9k0en9jr7qarqqt56709
-ZK_PROVER_URL=http://127.0.0.1:3001
+ZK_PROVER_URL=http://127.0.0.1:60001
 API_REQUEST_TIMEOUT=100
 POINTS_API=https://light-node.layeredge.io
 EOF
