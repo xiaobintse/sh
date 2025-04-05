@@ -150,11 +150,8 @@ function install_ritual_node() {
     echo "修改 docker-compose.yaml 中的端口映射..." | tee -a "$LOG_FILE"
     DOCKER_COMPOSE_FILE="deploy/docker-compose.yaml"
     if [ -f "$DOCKER_COMPOSE_FILE" ]; then
-        # 修改 4000 为 6666
-        sed -i 's/0.0.0.0:4000:4000/0.0.0.0:6666:6666/' "$DOCKER_COMPOSE_FILE" >> "$LOG_FILE" 2>&1
-        # 修改 8545 为 1000
-        sed -i 's/8545:3000/1000:1000/' "$DOCKER_COMPOSE_FILE" >> "$LOG_FILE" 2>&1
-        echo "[提示] 已将端口映射修改为 0.0.0.0:4005:4000 和 8550:3000" | tee -a "$LOG_FILE"
+        sed -i 's/0.0.0.0:1112:1112/0.0.0.0:6666:6666/' "$DOCKER_COMPOSE_FILE" >> "$LOG_FILE" 2>&1
+        sed -i 's/1006:1006/1000:1000/' "$DOCKER_COMPOSE_FILE" >> "$LOG_FILE" 2>&1
     else
         echo "[错误] 未找到 $DOCKER_COMPOSE_FILE 文件，端口修改失败" | tee -a "$LOG_FILE"
     fi
