@@ -14,23 +14,23 @@ install_docker() {
   if ! command -v docker &> /dev/null; then
     echo "Docker 没有安装，正在自动安装 Docker..."
 
-# 添加私钥:
-sudo apt-get update
-sudo apt-get install ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
+    # 添加私钥:
+    sudo apt-get update
+    sudo apt-get install ca-certificates curl
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-# 添加存储库:
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
+    # 添加存储库:
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
 
-# 安装 Docker
-echo "安装 Docker..."
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    # 安装 Docker
+    echo "安装 Docker..."
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
     # 启动并启用 Docker
     systemctl start docker
@@ -52,36 +52,36 @@ validate_ip_or_fqdn() {
   fi
 }
 
-# 获取用户输入
+# 获取并验证公网IP或FQDN
 get_user_input() {
   read -p "请输入容器实例的起始编号 (如 1): " START_NUM
   read -p "请输入容器实例的结束编号 (如 5): " END_NUM
 
   # 获取并验证公网IP或FQDN
-  read -p "Provide the public IPv4 address or FQDN where this node will be accessible: " P2P_ANNOUNCE_ADDRESS
+  read -p "请输入公网IP或FQDN: " P2P_ANNOUNCE_ADDRESS
 
   if [ -n "$P2P_ANNOUNCE_ADDRESS" ]; then
     # 验证地址有效性
     validate_ip_or_fqdn "$P2P_ANNOUNCE_ADDRESS"
     if [ $? -ne 0 ]; then
-      echo "Invalid address. Exiting!"
+      echo "无效的地址。退出脚本！"
       exit 1
     fi
 
-    # 根据输入的地址判断是 IPv4 还是 FQDN
+    # 判断是 IPv4 地址还是 FQDN
     if [[ "$P2P_ANNOUNCE_ADDRESS" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
       # IPv4 地址
       P2P_ANNOUNCE_ADDRESSES='["/ip4/'$P2P_ANNOUNCE_ADDRESS'/tcp/'$P2P_ipV4BindTcpPort'", "/ip4/'$P2P_ANNOUNCE_ADDRESS'/ws/tcp/'$P2P_ipV4BindWsPort'"]'
     elif [[ "$P2P_ANNOUNCE_ADDRESS" =~ ^[a-zA-Z0-9.-]+$ ]]; then
-      # FQDN
+      # FQDN 地址
       P2P_ANNOUNCE_ADDRESSES='["/dns4/'$P2P_ANNOUNCE_ADDRESS'/tcp/'$P2P_ipV4BindTcpPort'", "/dns4/'$P2P_ANNOUNCE_ADDRESS'/ws/tcp/'$P2P_ipV4BindWsPort'"]'
     else
-      echo "Invalid IP address or FQDN format. Exiting!"
+      echo "无效的 IP 或 FQDN 格式。退出脚本！"
       exit 1
     fi
   else
     P2P_ANNOUNCE_ADDRESSES=''
-    echo "No input provided, the Ocean Node might not be accessible from other nodes."
+    echo "没有提供地址，Ocean Node 可能无法从其他节点访问。"
   fi
 }
 
@@ -152,7 +152,7 @@ services:
       P2P_ipV6BindAddress: '::'
       P2P_ipV6BindTcpPort: '$IPV6_TCP_PORT'
       P2P_ipV6BindWsPort: '$IPV6_WS_PORT'
-      P2P_ANNOUNCE_ADDRESSES: '["/ip4/$P2P_ANNOUNCE_ADDRESS/tcp/$P2P_TCP_PORT", "/ip4/$P2P_ANNOUNCE_ADDRESS/ws/tcp/$P2P_WS_PORT"]'
+      P2P_ANNOUNCE_ADDRESSES: '$P2P_ANNOUNCE_ADDRESSES'
       DASHBOARD: 'true'
     networks:
       - ocean_network
