@@ -71,10 +71,10 @@ get_user_input() {
     # 判断是 IPv4 地址还是 FQDN
     if [[ "$P2P_ANNOUNCE_ADDRESS" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
       # IPv4 地址
-      P2P_ANNOUNCE_ADDRESSES='["/ip4/'$P2P_ANNOUNCE_ADDRESS'/tcp/'$P2P_ipV4BindTcpPort'", "/ip4/'$P2P_ANNOUNCE_ADDRESS'/ws/tcp/'$P2P_ipV4BindWsPort'"]'
+      P2P_ANNOUNCE_ADDRESSES='["/ip4/'$P2P_ANNOUNCE_ADDRESS'/tcp/'$P2P_TCP_PORT'", "/ip4/'$P2P_ANNOUNCE_ADDRESS'/ws/tcp/'$P2P_WS_PORT'"]'
     elif [[ "$P2P_ANNOUNCE_ADDRESS" =~ ^[a-zA-Z0-9.-]+$ ]]; then
       # FQDN 地址，手动加上端口号
-      P2P_ANNOUNCE_ADDRESSES='["/dns4/'$P2P_ANNOUNCE_ADDRESS'/tcp/'$P2P_ipV4BindTcpPort'", "/dns4/'$P2P_ANNOUNCE_ADDRESS'/ws/tcp/'$P2P_ipV4BindWsPort'"]'
+      P2P_ANNOUNCE_ADDRESSES='["/dns4/'$P2P_ANNOUNCE_ADDRESS'/tcp/'$P2P_TCP_PORT'", "/dns4/'$P2P_ANNOUNCE_ADDRESS'/ws/tcp/'$P2P_WS_PORT'"]'
     else
       echo "无效的 IP 或 FQDN 格式。退出脚本！"
       exit 1
@@ -136,24 +136,24 @@ services:
       - "$IPV6_TCP_PORT:$IPV6_TCP_PORT"
       - "$IPV6_WS_PORT:$IPV6_WS_PORT"
     environment:
-      PRIVATE_KEY: '$PRIVATE_KEY'
+      PRIVATE_KEY: "$PRIVATE_KEY"
       RPCS: 
-      DB_URL: 'http://$TYPESENSE_NAME:$TYPESENSE_PORT/?apiKey=xyz'
-      IPFS_GATEWAY: 'https://ipfs.io/'
-      ARWEAVE_GATEWAY: 'https://arweave.net/'
+      DB_URL: "http://$TYPESENSE_NAME:$TYPESENSE_PORT/?apiKey=xyz"
+      IPFS_GATEWAY: "https://ipfs.io/"
+      ARWEAVE_GATEWAY: "https://arweave.net/"
       INTERFACES: '["HTTP","P2P"]'
       ALLOWED_ADMINS: '["0x0a434fa3ebdc7304de53de92af9685cb5d18061a"]'
-      HTTP_API_PORT: '$HTTP_API_PORT'
-      P2P_ENABLE_IPV4: 'true'
-      P2P_ENABLE_IPV6: 'false'
-      P2P_ipV4BindAddress: '0.0.0.0'
-      P2P_ipV4BindTcpPort: '$P2P_TCP_PORT'
-      P2P_ipV4BindWsPort: '$P2P_WS_PORT'
-      P2P_ipV6BindAddress: '::'
-      P2P_ipV6BindTcpPort: '$IPV6_TCP_PORT'
-      P2P_ipV6BindWsPort: '$IPV6_WS_PORT'
-      P2P_ANNOUNCE_ADDRESSES: '$P2P_ANNOUNCE_ADDRESSES'
-      DASHBOARD: 'true'
+      HTTP_API_PORT: "$HTTP_API_PORT"
+      P2P_ENABLE_IPV4: "true"
+      P2P_ENABLE_IPV6: "false"
+      P2P_ipV4BindAddress: "0.0.0.0"
+      P2P_ipV4BindTcpPort: "$P2P_TCP_PORT"
+      P2P_ipV4BindWsPort: "$P2P_WS_PORT"
+      P2P_ipV6BindAddress: "::"
+      P2P_ipV6BindTcpPort: "$IPV6_TCP_PORT"
+      P2P_ipV6BindWsPort: "$IPV6_WS_PORT"
+      P2P_ANNOUNCE_ADDRESSES: "$P2P_ANNOUNCE_ADDRESSES"
+      DASHBOARD: "true"
     networks:
       - ocean_network
     depends_on:
@@ -168,7 +168,7 @@ services:
       - ocean_network
     volumes:
       - typesense-data:/data
-    command: '--data-dir /data --api-key=xyz'
+    command: "--data-dir /data --api-key=xyz"
 
 volumes:
   typesense-data:
