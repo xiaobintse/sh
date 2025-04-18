@@ -78,7 +78,7 @@ function start_mining() {
     echo "请输入钱包地址以开始挖矿: "
     read wallet_address
     echo "正在启动挖矿..."
-    ./src/shaicoind -moneyplyz="$wallet_address" -addnode=51.161.117.199:42069 -addnode=139.60.161.14:42069 -addnode=149.50.101.189:21026 -addnode=3.21.125.80:42069 > "$LOG_FILE" 2>&1 &
+    ./src/shaicoind -moneyplz="$wallet_address" -addnode=51.161.117.199:42069 -addnode=139.60.161.14:42069 -addnode=149.50.101.189:21026 -addnode=3.21.125.80:42069 > "$LOG_FILE" 2>&1 &
     echo "挖矿已开始，日志已记录到 $LOG_FILE 。"
 
     pause
