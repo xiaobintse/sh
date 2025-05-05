@@ -250,7 +250,7 @@ export OMP_NUM_THREADS=70
 export GOMP_CPU_AFFINITY="0-69"
 
 if [ -n "$ORG_ID" ]; then
-    taskset -c 0-69 python -m hivemind_exp.gsm8k.train_single_gpu \
+    python -m hivemind_exp.gsm8k.train_single_gpu \
         --hf_token "$HUGGINGFACE_ACCESS_TOKEN" \
         --identity_path "$IDENTITY_PATH" \
         --modal_org_id "$ORG_ID" \
@@ -258,7 +258,7 @@ if [ -n "$ORG_ID" ]; then
         --config "$CONFIG_PATH" \
         --game "$GAME"
 else
-    taskset -c 0-69 python -m hivemind_exp.gsm8k.train_single_gpu \
+      python -m hivemind_exp.gsm8k.train_single_gpu \
         --hf_token "$HUGGINGFACE_ACCESS_TOKEN" \
         --identity_path "$IDENTITY_PATH" \
         --public_maddr "$PUB_MULTI_ADDRS" \
