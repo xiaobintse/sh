@@ -4,7 +4,7 @@ set -euo pipefail
 
 # General arguments
 ROOT=$PWD
-export OMP_NUM_THREADS=70
+
 export PUB_MULTI_ADDRS
 export PEER_MULTI_ADDRS
 export HOST_MULTI_ADDRS
@@ -148,6 +148,7 @@ if [ "$CONNECT_TO_TESTNET" = true ]; then
             sudo apt update && sudo apt install -y yarn
         else
             echo "Yarn not found. Installing Yarn globally with npm (no profile edits)…"
+            # This lands in $NVM_DIR/versions/node/<ver>/bin which is already on PATH
             npm install -g --silent yarn
         fi
     fi
@@ -245,10 +246,6 @@ echo_green ">> Good luck in the swarm!"
 echo_blue ">> Post about rl-swarm on X/twitter! --> https://tinyurl.com/swarmtweet"
 echo_blue ">> And remember to star the repo on GitHub! --> https://github.com/gensyn-ai/rl-swarm"
 
-# Bind CPU threads
-export OMP_NUM_THREADS=70
-export GOMP_CPU_AFFINITY="0-69"
-
 if [ -n "$ORG_ID" ]; then
     python -m hivemind_exp.gsm8k.train_single_gpu \
         --hf_token "$HUGGINGFACE_ACCESS_TOKEN" \
@@ -258,7 +255,7 @@ if [ -n "$ORG_ID" ]; then
         --config "$CONFIG_PATH" \
         --game "$GAME"
 else
-      python -m hivemind_exp.gsm8k.train_single_gpu \
+    python -m hivemind_exp.gsm8k.train_single_gpu \
         --hf_token "$HUGGINGFACE_ACCESS_TOKEN" \
         --identity_path "$IDENTITY_PATH" \
         --public_maddr "$PUB_MULTI_ADDRS" \
