@@ -22,7 +22,7 @@ DEFAULT_PEER_MULTI_ADDRS="/ip4/38.101.215.13/tcp/30002/p2p/QmQ2gEXoPJg6iMBSUFWGz
 PEER_MULTI_ADDRS=${PEER_MULTI_ADDRS:-$DEFAULT_PEER_MULTI_ADDRS}
 
 # Check if host multi-address is given else set to default
-DEFAULT_HOST_MULTI_ADDRS="/ip4/0.0.0.0/tcp/38332"
+DEFAULT_HOST_MULTI_ADDRS="/ip4/0.0.0.0/tcp/38331"
 HOST_MULTI_ADDRS=${HOST_MULTI_ADDRS:-$DEFAULT_HOST_MULTI_ADDRS}
 
 # Path to an RSA private key. If this path does not exist, a new key pair will be created.
@@ -160,10 +160,10 @@ if [ "$CONNECT_TO_TESTNET" = true ]; then
     sleep 5
 
     # Try to open the URL in the default browser
-    if open http://localhost:3001 2> /dev/null; then
-        echo_green ">> Successfully opened http://localhost:3001 in your default browser."
+    if open http://localhost:3000 2> /dev/null; then
+        echo_green ">> Successfully opened http://localhost:3000 in your default browser."
     else
-        echo ">> Failed to open http://localhost:3001. Please open it manually."
+        echo ">> Failed to open http://localhost:3000. Please open it manually."
     fi
 
     cd ..
@@ -180,7 +180,7 @@ if [ "$CONNECT_TO_TESTNET" = true ]; then
     # Wait until the API key is activated by the client
     echo "Waiting for API key to become activated..."
     while true; do
-        STATUS=$(curl -s "http://localhost:3001/api/get-api-key-status?orgId=$ORG_ID")
+        STATUS=$(curl -s "http://localhost:3000/api/get-api-key-status?orgId=$ORG_ID")
         if [[ "$STATUS" == "activated" ]]; then
             echo "API key is activated! Proceeding..."
             break
