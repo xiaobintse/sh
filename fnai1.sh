@@ -247,7 +247,7 @@ echo_blue ">> Post about rl-swarm on X/twitter! --> https://tinyurl.com/swarmtwe
 echo_blue ">> And remember to star the repo on GitHub! --> https://github.com/gensyn-ai/rl-swarm"
 
 if [ -n "$ORG_ID" ]; then
- taskset -c 0-80 python -m hivemind_exp.gsm8k.train_single_gpu \
+ taskset -c 91-180 python -m hivemind_exp.gsm8k.train_single_gpu \
         --hf_token "$HUGGINGFACE_ACCESS_TOKEN" \
         --identity_path "$IDENTITY_PATH" \
         --modal_org_id "$ORG_ID" \
@@ -255,7 +255,7 @@ if [ -n "$ORG_ID" ]; then
         --config "$CONFIG_PATH" \
         --game "$GAME"
 else
- taskset -c 0-80 python -m hivemind_exp.gsm8k.train_single_gpu \
+ taskset -c 91-180 python -m hivemind_exp.gsm8k.train_single_gpu \
         --hf_token "$HUGGINGFACE_ACCESS_TOKEN" \
         --identity_path "$IDENTITY_PATH" \
         --public_maddr "$PUB_MULTI_ADDRS" \
