@@ -5,6 +5,8 @@ set -euo pipefail
 # General arguments
 ROOT=$PWD
 
+export OMP_NUM_THREADS=4
+export MKL_NUM_THREADS=4
 export PUB_MULTI_ADDRS
 export PEER_MULTI_ADDRS
 export HOST_MULTI_ADDRS
