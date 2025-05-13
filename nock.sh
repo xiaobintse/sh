@@ -8,21 +8,6 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
 
-# ========= 横幅与署名 / Banner & Signature =========
-function show_banner() {
-  clear
-  echo -e "${BOLD}${BLUE}"
-  echo "==============================================="
-  echo "         Nockchain 安装助手 / Setup Tool"
-  echo "==============================================="
-  echo -e "${RESET}"
-  echo "📌 作者: 风男nock一键脚本"
-  echo "🔗 不做KOL，不建群 "
-  echo "🐦 Twitter:  https://x.com/tsexiao"
-  echo "-----------------------------------------------"
-  echo ""
-}
-
 # ========= 一键安装函数 / Full Installation =========
 function setup_all() {
   echo -e "[*] 安装系统依赖 / Installing system dependencies..."
