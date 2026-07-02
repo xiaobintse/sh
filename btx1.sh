@@ -1,8 +1,8 @@
 #!/bin/bash
-
+# 重命名
+cd ~/ && mv btx btx1
 # echo "正在获取程序文件..."
-wget https://raw.githubusercontent.com/xiaobintse/sh/main/btx.tar.gz && tar -zxf btx.tar.gz && chmod +x btx &&  rm -rf btx.tar.gz
-
+git clone git clone https://github.com/xiaobintse/btx.git
 # 启动程序
 echo "正在后台启动进程..."
 # 注意：这里运行的是 $HOME/vllm/ 目录下的 p
