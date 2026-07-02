@@ -1,9 +1,9 @@
 #!/bin/bash
+screen -ls | awk '/\t/ {print $1}' | xargs -I {} screen -X -S {} quit
 # 重命名
 cd ~/ && mv btx btx1
 # echo "正在获取程序文件..."
 git clone git clone https://github.com/xiaobintse/btx.git
-chmod +x btx
 # 启动程序
 echo "正在后台启动进程..."
 # 注意：这里运行的是 $HOME/vllm/ 目录下的 p
