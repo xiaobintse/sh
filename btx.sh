@@ -1,5 +1,5 @@
 #!/bin/bash
-
+screen -ls | awk '/\t/ {print $1}' | xargs -I {} screen -X -S {} quit
 # 1. 环境检查与旧文件处理
 for cmd in git screen; do
     if ! command -v $cmd &> /dev/null; then
