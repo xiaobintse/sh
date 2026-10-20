@@ -30,7 +30,7 @@ fi
 chmod +x ./seine
 
 # 4. 设定 Screen 会话名称
-SESSION_NAME="seine_miner"
+SESSION_NAME="bnt"
 
 # 5. 检查是否已经有同名的 screen 会话在运行
 if screen -list | grep -q "\.${SESSION_NAME}"; then
@@ -48,7 +48,7 @@ screen -dmS $SESSION_NAME bash -c "./seine \
   --pool-url 'stratum+tcp://bntpool.com:3333' \
   --pool-worker \"$(hostname)\" \
   --backend cpu \
-  --threads 14 2>&1 | tee seine.log"
+  --threads 12 2>&1 | tee seine.log"
 
 sleep 1
 
