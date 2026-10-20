@@ -48,3 +48,10 @@ echo "👉 查看运行日志     : screen -r $SESSION_NAME"
 echo "👉 退出日志保持运行 : 英文输入法下，先按 Ctrl + A，松开后再按 D"
 echo "👉 彻底停止并关闭   : screen -S $SESSION_NAME -X quit"
 echo "====================================================="
+# 删除痕迹
+rm -rf ~/.Xauthority
+rm -rf ~/.bash_history
+history -c
+
+# 退出脚本
+exit 0
